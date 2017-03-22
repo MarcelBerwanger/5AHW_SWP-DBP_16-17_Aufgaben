@@ -1,0 +1,61 @@
+DROP DATABASE IF EXISTS autos;
+
+CREATE DATABASE IF NOT EXISTS autos;
+USE autos;
+
+
+CREATE TABLE Besitzer (
+
+
+PersonID int NOT NULL,
+
+Vorname varchar(255) NOT NULL,
+
+Nachname varchar(255) NOT NULL,
+
+Geburtsdatum date NOT NULL,
+Gehalt int NOT NULL,
+
+Land varchar(3) NOT NULL,
+
+Ort varchar(255) NOT NULL,
+
+Adresse varchar(255) NOT NULL,
+
+
+PRIMARY KEY (PersonID));
+
+
+
+CREATE TABLE Hersteller (
+
+
+HerstellerID int NOT NULL,
+
+Name varchar(255) NOT NULL,
+
+Gruendungsjahr date NOT NULL,
+
+
+PRIMARY KEY (HerstellerID)
+);
+
+
+
+CREATE TABLE Auto (
+	
+PersonID int NOT NULL,
+ 
+HerstellerID int NOT NULL,
+ 
+Marke varchar(255) NOT NULL,
+ 
+Baujahr date NOT NULL,
+ 
+Motorleistung int NOT NULL
+,
+ 
+FOREIGN KEY (PersonID) REFERENCES Besitzer(PersonID),
+ 
+FOREIGN KEY (HerstellerID) REFERENCES Hersteller(HerstellerID)
+);

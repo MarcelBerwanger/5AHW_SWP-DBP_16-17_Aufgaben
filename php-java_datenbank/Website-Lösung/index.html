@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<script>
+			function checkDataInsert(){
+				var herid = document.getElementById("herid").value;
+				var name = document.getElementById("name").value;
+				var jahr = document.getElementById("jahr").value;
+				if(herid==""|name==""|jahr==""){
+					alert("Eingaben fehlen!");
+					return;
+				}
+				else if(isNaN(herid) | !(isNaN(name)) | isNaN(jahr)){
+					alert("Falsches Eingabeformat!");
+					return;
+				}
+				else{
+					loadData();
+				}
+			}
+			
+			function checkDataDelete(){
+				var herid = document.getElementById("herid").value;
+				if(herid==""){
+					alert("Eingaben fehlen!");
+					return;
+				}
+				else if(isNaN(herid)){
+					alert("Falsches Eingabeformat!");
+					return;
+				}
+				else{
+					deleteData();
+				}
+			}
+			
+			function loadData() {
+				var herid = document.getElementById("herid").value;
+				var name = document.getElementById("name").value;
+				var jahr = document.getElementById("jahr").value;
+				
+			  var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200){
+					document.getElementById("message").innerHTML = this.responseText;
+				}
+			  };
+			  xhttp.open("POST", "getData.php", true);
+			  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			  xhttp.send("herid="+herid+"&name="+name+"&jahr="+jahr);
+			}
+			function loadDataAll() {				
+			  var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200){
+					document.getElementById("message").innerHTML = this.responseText;
+				}
+			  };
+			  xhttp.open("POST", "getData.php", true);
+			  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			  xhttp.send("get"=all);
+			}
+			function deleteData() {
+				var herid = document.getElementById("herid").value;
+				
+			  var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200){
+					document.getElementById("message").innerHTML = this.responseText;
+				}
+			  };
+			  xhttp.open("POST", "deleteData.php", true);
+			  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			  xhttp.send("herid="+herid);
+			}
+		</script>
+	</head>
+	
+	<body>
+	<h1 id="heading">Datenbankoperationen</h1>
+		<form id="insert">
+			<fieldset>
+				<legend>Hersteller anlegen</legend>
+				<p><label class="field" for="hid">HerstellerID:</label><input type="text" name="herid" id="herid" 7></p>
+				<p><label class="field" for="name">Name:</label><input type="text" name="name" id="name"></p>
+				<p><label class="field" for="jahr">Gruendungsjahr:</label><input type="text" name="jahr" id="jahr"></p>
+				<button type="button" onclick="checkDataInsert()" id="saveHersteller">Speichern</button>
+				<div>
+					<span>Status</span>
+					<p id="message"></p>
+				</div>
+			</fieldset>
+		</form>
+		
+		<form id="delete">
+			<fieldset>
+				<legend>Hersteller entfernen</legend>
+				<p><label class="field" for="hid">HerstellerID:</label><input type="text" name="herid" id="herid" 7></p>
+				<button type="button" onclick="checkDataDelete()" id="deleteHersteller">Entfernen</button>
+				<div>
+					<span>Status</span>
+					<p id="message"></p>
+				</div>
+			</fieldset>
+		</form>
+		
+		<fieldset>
+			<legend>Hersteller abfragen</legend>
+			<button type="button" onclick="loadDataAll()" id="readHersteller">Auslesen</button>
+		</fieldset>
+	</body>
+</html>

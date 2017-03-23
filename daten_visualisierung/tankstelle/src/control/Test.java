@@ -13,7 +13,7 @@ public class Test {
 		
 		try {
 			instance = DataManager.getInstance(); 
-			chartView = new ChartView(DataObject.getSeries(instance.getYearData(1485649861)), instance.get24hData(1485649861));
+			chartView = new ChartView(DataObject.getSeries(instance.getYearData(1485649861)), instance.get24hData(1485649861), 1485649861);
 			frame = chartView.showInFrame();
 			chartView.saveAsPicture(frame);
 			

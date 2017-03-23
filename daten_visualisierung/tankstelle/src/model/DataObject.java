@@ -27,6 +27,15 @@ public class DataObject {
 	public double getPrice() {
 		return price;
 	}
+
+	public String getDateHours() {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH");
+		return sdf.format(date)+":00";
+	}
+	public String getPriceString() {
+		DecimalFormat df = new DecimalFormat("#.000");
+		return df.format(price);
+	}
 	
 	@SuppressWarnings("unchecked")
 	public static ArrayList<DataSeries> getSeries(ArrayList<DataObject> dataObjects){
@@ -49,7 +58,7 @@ public class DataObject {
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH");
-		DecimalFormat df = new DecimalFormat("#.000"); ;
+		DecimalFormat df = new DecimalFormat("#.000");
 		return "Tanke: "+name+ "; " + sdf.format(date)+":00 Uhr UTC"+ "; " +df.format(price)+"€";
 	}
 }

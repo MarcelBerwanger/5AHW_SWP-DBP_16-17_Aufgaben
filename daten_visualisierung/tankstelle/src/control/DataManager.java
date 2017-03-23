@@ -58,7 +58,6 @@ public class DataManager {
 	
 	public ArrayList<DataObject> get24hData(long start_time) throws SQLException{
 		ArrayList<DataObject> tempRes = new ArrayList<>();
-		//TODO Abfrage anpassen
 		String command ="SELECT name, MIN(avg_price) as avg_price, datum FROM" 
 				+ " (SELECT name, AVG(value) as avg_price, datum FROM "+properties.getProperty(props_table_data)
 				+ " JOIN "+properties.getProperty(props_table_name)+" USING (tankenr)"
